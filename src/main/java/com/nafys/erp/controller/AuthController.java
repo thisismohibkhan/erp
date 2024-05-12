@@ -1,4 +1,4 @@
-package com.nafys.erp.config;
+package com.nafys.erp.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nafys.erp.entity.User;
 import com.nafys.erp.model.JwtRequest;
 import com.nafys.erp.model.JwtResponse;
 import com.nafys.erp.security.JwtHelper;
+import com.nafys.erp.services.UserService;
 
 @RestController
 @RequestMapping("/auth")
@@ -26,6 +28,9 @@ public class AuthController {
 
     @Autowired
     private UserDetailsService userDetailsService;
+    
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private AuthenticationManager manager;
@@ -39,11 +44,11 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
+    	System.out.println(request);
+        this.doAuthenticate(request.getUsername(), request.getPassword());
 
-        this.doAuthenticate(request.getEmail(), request.getPassword());
 
-
-        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
         String token = this.helper.generateToken(userDetails);
 
         JwtResponse response = JwtResponse.builder()
@@ -68,6 +73,11 @@ public class AuthController {
     @ExceptionHandler(BadCredentialsException.class)
     public String exceptionHandler() {
         return "Credentials Invalid !!";
+    }
+    
+    @PostMapping("/register")
+    public User createUser(@RequestBody User user) {
+    	return userService.createUser(user);
     }
 
 }

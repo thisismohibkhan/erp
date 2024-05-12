@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nafys.erp.model.User;
+import com.nafys.erp.entity.User;
 import com.nafys.erp.services.UserService;
 
 @RestController

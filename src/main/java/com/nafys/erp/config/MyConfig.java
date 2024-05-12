@@ -1,4 +1,4 @@
-package com.nafys.erp;
+package com.nafys.erp.config;
 
 
 import org.springframework.context.annotation.Bean;

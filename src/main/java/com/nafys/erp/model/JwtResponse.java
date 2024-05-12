@@ -1,38 +1,20 @@
 package com.nafys.erp.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Builder
 public class JwtResponse {
-
-	public JwtResponse() {
-	}
-	public JwtResponse(String jwtToken, String username) {
-		super();
-		this.jwtToken = jwtToken;
-		this.username = username;
-	}
 	private String jwtToken;
 	private String username;
-	public String getJwtToken() {
-		return jwtToken;
-	}
-	public void setJwtToken(String jwtToken) {
-		this.jwtToken = jwtToken;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	@Override
-	public String toString() {
-		return "JwtResponse [jwtToken=" + jwtToken + ", username=" + username + "]";
-	}
-	public static JwtResponse builder() {
-		return new JwtResponse();
-	}
-	
 	
 }
